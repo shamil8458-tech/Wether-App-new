@@ -1,0 +1,628 @@
+
+/* =========================
+   1. RESET & BASE STYLES
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    color: #20283b;
+    background: linear-gradient(125deg, #9eafd9 0%, #a9cce8 48%, #81d2e6 100%);
+    background-attachment: fixed;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* =========================
+   2. NAVBAR
+========================= */
+
+.theme-toggle {
+    min-height: 68px;
+    padding: 12px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.20);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.brand {
+    font-size: 23px;
+    font-weight: 700;
+    color: #243b61;
+    letter-spacing: 0.5px;
+}
+
+.brand span {
+    color: #3577b9;
+}
+
+#themeBtn {
+    padding: 10px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 9px;
+    background: rgba(255, 255, 255, 0.45);
+    color: #253550;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+#themeBtn:hover {
+    background: rgba(255, 255, 255, 0.7);
+}
+
+/* =========================
+   3. MAIN CONTAINER
+========================= */
+
+.container {
+    width: 100%;
+    max-width: 1050px;
+    margin: 0 auto;
+    padding: 35px 24px;
+}
+
+/* =========================
+   4. PAGE HEADING
+========================= */
+
+.page-header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.page-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #243550;
+}
+
+.page-header p {
+    font-size: 15px;
+    color: #354761;
+    line-height: 1.6;
+}
+
+/* =========================
+   5. SEARCH SECTION
+========================= */
+
+.search-section {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+#cityInput {
+    width: 100%;
+    max-width: 480px;
+    height: 48px;
+    padding: 0 16px;
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 10px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.5);
+    color: #20283b;
+    font-size: 15px;
+    transition: border 0.2s ease, background 0.2s ease;
+}
+
+#cityInput::placeholder {
+    color: #53647c;
+}
+
+#cityInput:focus {
+    border-color: white;
+    background: rgba(255, 255, 255, 0.75);
+}
+
+#searchBtn {
+    min-height: 48px;
+    padding: 0 23px;
+    border: none;
+    border-radius: 10px;
+    background: #356bd0;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+#searchBtn:hover {
+    background: #2858b5;
+    transform: translateY(-1px);
+}
+
+/* =========================
+   6. CITY SUGGESTIONS
+========================= */
+
+.suggestions {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(480px, 100%);
+    max-height: 220px;
+    overflow-y: auto;
+    display: none;
+    background: #ffffff;
+    color: #20283b;
+    border: 1px solid #e1e8f2;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(37, 59, 91, 0.15);
+    z-index: 100;
+}
+
+.suggestion-item {
+    padding: 12px 15px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.suggestion-item:hover {
+    background: #edf4ff;
+}
+
+/* =========================
+   7. WEATHER CARD
+========================= */
+
+.weather-card {
+    width: 100%;
+    max-width: 700px;
+    min-height: 340px;
+    margin: 0 auto;
+    padding: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.30);
+    box-shadow: 0 15px 35px rgba(46, 79, 120, 0.12);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.weather-content {
+    width: 100%;
+    max-width: 520px;
+    padding: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.22);
+    color: #20283b;
+    text-align: center;
+}
+
+.weather-content h2 {
+    margin-bottom: 18px;
+    font-size: 30px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.weather-content p {
+    margin: 13px 0;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-wrap: anywhere;
+}
+
+.weather-content button {
+    width: 100%;
+    max-width: 240px;
+    margin-top: 18px;
+    padding: 12px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.6);
+    color: #294c80;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.weather-content button:hover {
+    background: #ffffff;
+}
+
+/* =========================
+   8. LOADING & ERROR
+========================= */
+
+.loading {
+    max-width: 700px;
+    margin: 16px auto;
+    text-align: center;
+    font-size: 15px;
+    color: #253b60;
+}
+
+.error {
+    max-width: 700px;
+    margin: 14px auto;
+    padding: 12px 16px;
+    border: 1px solid rgba(180, 35, 24, 0.2);
+    border-radius: 9px;
+    background: rgba(255, 255, 255, 0.65);
+    color: #b42318;
+    font-size: 14px;
+    text-align: center;
+}
+
+/* =========================
+   9. FAVORITES SECTION
+========================= */
+
+.favorites-section {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.75);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 24px rgba(46, 79, 120, 0.06);
+}
+
+.favorites-section h2 {
+    margin-bottom: 18px;
+    font-size: 21px;
+    font-weight: 600;
+    color: #243550;
+}
+
+#favoritesList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+#favoritesList > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 11px 13px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.4);
+}
+
+#favoritesList span {
+    color: #243550;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#favoritesList button {
+    padding: 5px 8px;
+    border: none;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.65);
+    cursor: pointer;
+}
+
+/* =========================
+   10. FORECAST SECTION
+========================= */
+
+.forecast-section {
+    width: 100%;
+    max-width: 1050px;
+    margin: 0 auto 40px;
+    padding: 0 24px;
+}
+
+.forecast-title {
+    margin: 25px 0;
+    color: #243550;
+    font-size: 25px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.forecast-cards {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    width: 100%;
+}
+
+.forecast-card {
+    width: 155px;
+    min-height: 185px;
+    padding: 18px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    border-radius: 19px;
+    background: rgba(255, 255, 255, 0.38);
+    color: #20283b;
+    text-align: center;
+    box-shadow: 0 7px 20px rgba(46, 79, 120, 0.08);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.forecast-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 25px rgba(46, 79, 120, 0.14);
+}
+
+.forecast-card h4 {
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.forecast-card img {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+
+.forecast-card p {
+    margin-top: 7px;
+    font-size: 14px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+/* =========================
+   11. DARK MODE
+========================= */
+
+body.dark {
+    background: linear-gradient(135deg, #151d31, #263d57);
+    background-attachment: fixed;
+    color: #f5f7ff;
+}
+
+body.dark .theme-toggle {
+    background: rgba(12, 18, 31, 0.35);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+body.dark .brand,
+body.dark .brand span,
+body.dark .page-header h1,
+body.dark .page-header p,
+body.dark .favorites-section h2,
+body.dark .forecast-title {
+    color: #f1f5ff;
+}
+
+body.dark #themeBtn {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+body.dark #cityInput {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.25);
+    color: white;
+}
+
+body.dark #cityInput::placeholder {
+    color: #c3cce0;
+}
+
+body.dark #cityInput:focus {
+    background: rgba(255, 255, 255, 0.13);
+}
+
+body.dark .weather-card,
+body.dark .favorites-section,
+body.dark .forecast-card {
+    background: rgba(17, 26, 43, 0.52);
+    border-color: rgba(255, 255, 255, 0.17);
+    color: #f5f7ff;
+}
+
+body.dark .weather-content {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #f5f7ff;
+}
+
+body.dark .weather-content button {
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+body.dark .weather-content button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+body.dark #favoritesList > div {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+body.dark #favoritesList span {
+    color: white;
+}
+
+body.dark #favoritesList button {
+    background: rgba(255, 255, 255, 0.12);
+    color: white;
+}
+
+body.dark .suggestions {
+    background: #222d40;
+    color: white;
+    border-color: #394961;
+}
+
+body.dark .suggestion-item:hover {
+    background: #35445d;
+}
+
+body.dark .loading {
+    color: #f1f5ff;
+}
+
+body.dark .error {
+    background: rgba(70, 25, 31, 0.8);
+    color: #ffb8b8;
+    border-color: #80414a;
+}
+
+/* =========================
+   12. TABLET RESPONSIVE
+========================= */
+
+@media (max-width: 768px) {
+    .container {
+        padding: 28px 18px;
+    }
+
+    .page-header h1 {
+        font-size: 28px;
+    }
+
+    .weather-card {
+        padding: 20px;
+    }
+
+    .weather-content {
+        padding: 22px 16px;
+    }
+
+    .forecast-card {
+        width: 145px;
+    }
+}
+
+/* =========================
+   13. MOBILE RESPONSIVE
+========================= */
+
+@media (max-width: 600px) {
+    .theme-toggle {
+        min-height: 60px;
+        padding: 10px 16px;
+    }
+
+    .brand {
+        font-size: 20px;
+    }
+
+    #themeBtn {
+        padding: 9px 12px;
+        font-size: 12px;
+    }
+
+    .container {
+        padding: 24px 14px;
+    }
+
+    .page-header {
+        margin-bottom: 22px;
+    }
+
+    .page-header h1 {
+        font-size: 25px;
+    }
+
+    .page-header p {
+        font-size: 14px;
+    }
+
+    .search-section {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    #cityInput,
+    #searchBtn {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .weather-card {
+        min-height: 280px;
+        padding: 12px;
+        border-radius: 21px;
+    }
+
+    .weather-content {
+        padding: 20px 12px;
+        border-radius: 15px;
+    }
+
+    .weather-content h2 {
+        font-size: 24px;
+    }
+
+    .weather-content p {
+        font-size: 14px;
+    }
+
+    .favorites-section {
+        padding: 17px;
+    }
+
+    .favorites-section h2 {
+        font-size: 19px;
+    }
+
+    .forecast-section {
+        padding: 0 14px;
+    }
+
+    .forecast-title {
+        font-size: 22px;
+    }
+
+    .forecast-cards {
+        gap: 12px;
+    }
+
+    .forecast-card {
+        width: calc(50% - 6px);
+        max-width: 180px;
+        min-height: 165px;
+        padding: 15px 8px;
+    }
+}
+
+/* =========================
+   14. SMALL MOBILE
+========================= */
+
+@media (max-width: 360px) {
+    .brand {
+        font-size: 18px;
+    }
+
+    .weather-content h2 {
+        font-size: 21px;
+    }
+
+    .forecast-card {
+        width: 100%;
+        max-width: 220px;
+    }
+}
